@@ -2,7 +2,7 @@ package com.board.domain;
 
 import java.time.LocalDateTime;
 
-import com.board.paging.Criteria; 
+import com.board.paging.Criteria;
 import com.board.paging.PaginationInfo;
 
 public class CommonDTO extends Criteria {
@@ -12,6 +12,7 @@ public class CommonDTO extends Criteria {
 	private LocalDateTime insertTime;
 	private LocalDateTime updateTime;
 	private LocalDateTime deleteTime;
+	
 	public PaginationInfo getPaginationInfo() {
 		return paginationInfo;
 	}
@@ -23,11 +24,6 @@ public class CommonDTO extends Criteria {
 	}
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
-	}
-	@Override
-	public String toString() {
-		return "CommonDTO [paginationInfo=" + paginationInfo + ", deleteYn=" + deleteYn + ", insertTime=" + insertTime
-				+ ", updateTime=" + updateTime + ", deleteTime=" + deleteTime + "]";
 	}
 	public LocalDateTime getInsertTime() {
 		return insertTime;
@@ -47,5 +43,10 @@ public class CommonDTO extends Criteria {
 	public void setDeleteTime(LocalDateTime deleteTime) {
 		this.deleteTime = deleteTime;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "CommonDTO [paginationInfo=" + paginationInfo + ", deleteYn=" + deleteYn + ", insertTime=" + insertTime
+				+ ", updateTime=" + updateTime + ", deleteTime=" + deleteTime + "]";
+	}
 }

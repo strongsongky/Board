@@ -4,21 +4,32 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
-	
-	private int currentPageNo; 
-	private int recordsPerPage; 
+	private int currentPageNo;
+	private int recordsPerPage;
 	private int pageSize;
-	private String searchKeyword; 
+	private String searchKeyword;
 	private String searchType;
 	
 	public Criteria() {
 		this.currentPageNo = 1;
-		this.recordsPerPage = 10; 
+		this.recordsPerPage = 10;
 		this.pageSize = 10;
 	}
 	
 	public int getStartPage() {
 		return (currentPageNo - 1) * recordsPerPage;
+	}
+
+	public String makeQueryString(int pageNo) {
+		UriComponents uriComponents= UriComponentsBuilder.newInstance()
+				.queryParam("currentPageNo", pageNo)
+				.queryParam("recordsPerPage", recordsPerPage)
+				.queryParam("pageSize", pageSize)
+				.queryParam("searchType", searchType)
+				.queryParam("searchKeyword", searchKeyword)
+				.build()
+				.encode();
+		return uriComponents.toUriString();
 	}
 
 	public int getCurrentPageNo() {
@@ -66,18 +77,5 @@ public class Criteria {
 		return "Criteria [currentPageNo=" + currentPageNo + ", recordsPerPage=" + recordsPerPage + ", pageSize="
 				+ pageSize + ", searchKeyword=" + searchKeyword + ", searchType=" + searchType + "]";
 	}
-	
-	public String makeQueryString(int pageNo) {
-	
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("currentPageNo", pageNo)
-				.queryParam("recordsPerPage", recordsPerPage) 
-				.queryParam("pageSize", pageSize)
-				.queryParam("searchType", searchType) 
-				.queryParam("searchKeyword", searchKeyword)
-				.build()
-				.encode();
-		
-		return uriComponents.toUriString();
-	}
+
 }
